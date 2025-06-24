@@ -11,7 +11,7 @@ $(ENVS): %:
 	$(DOCKER) build \
 		--build-arg APT_PROXY="$(APT_PROXY)" \
 		--file "$@/Dockerfile" \
-		--tag "$(IMAGE_NAMESPACE)/$@:latest" \
+		--tag "$(IMAGE_NAMESPACE)/$(notdir $@):latest" \
 		$@
 
 build: $(ENVS)
