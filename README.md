@@ -20,4 +20,9 @@ and when you execute `cargo`, you pretty much get cargo running in
 
     envi.ypcs.fi/cargo:latest
 
-container with current working directory etc. mounted.
+container with current working directory etc. mounted. Alternatively you can
+run eg.
+
+    envi cargo
+
+to get shell in an single-use environment with Cargo preinstalled.
