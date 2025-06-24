@@ -1,3 +1,9 @@
+envi (0.1.0+a2) unstable; urgency=medium
+
+  * Add minimal error handling.
+
+ -- Ville Korhonen <ville@xd.fi>  Tue, 24 Jun 2025 22:05:27 +0300
+
 envi (0.1.0+a1) unstable; urgency=medium
 
   * Initial release.

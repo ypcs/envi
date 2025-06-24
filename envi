@@ -2,20 +2,37 @@
 set -e
 set -u
 
-NAME="$(basename "$0")"
-
 ENTRYPOINT=""
 
-if [ "${NAME}" = "envi" ]
-then
-  NAME="$1"
-  shift
-  ENTRYPOINT="--entrypoint=/usr/bin/bash"
-fi
+# Use script name (or eg. name of a symlink)
+NAME="$(basename "$0")"
 
-# TODO: Use cwd as cwd
+usage() {
+    echo "usage: $0 <name>"
+}
+
+case "${NAME}"
+    in
+    envi)
+        if [ "$#" -lt 1 ]
+        then
+            usage
+            exit 1
+        fi
+        NAME="${1}"
+        shift
+        ENTRYPOINT="--entrypoint=/usr/bin/bash"
+    ;;
+    "")
+        usage
+        exit 1
+    ;;
+    *)
+        # ok...
+    ;;
+esac
+
 # TODO: Mount whole git project?
-# TODO: Mount cache dirs?
 # TODO: Build image if not exists
 
 IMAGE="envi.ypcs.fi/${NAME}:latest"
