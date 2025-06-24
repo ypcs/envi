@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+set -u
+
+NAME="$(basename "$0")"
+
+ENTRYPOINT=""
+
+if [ "${NAME}" = "envi" ]
+then
+  NAME="$1"
+  shift
+  ENTRYPOINT="--entrypoint=/usr/bin/bash"
+fi
+
+# TODO: Use cwd as cwd
+# TODO: Mount whole git project?
+# TODO: Mount cache dirs?
+# TODO: Build image if not exists
+
+IMAGE="envi.ypcs.fi/${NAME}:latest"
+GIT_PARENT="$(git rev-parse --show-toplevel)"
+ID="$(echo "${GIT_PARENT:-${PWD}}" |sha256sum |awk '{print $1}')"
+_CACHEDIR="${XDG_CACHE_HOME:-${HOME}/.cache}"
+CACHEDIR="${_CACHEDIR}/envi/${NAME}/${ID}"
+
+mkdir -p "${CACHEDIR}"
+echo "Using '${CACHEDIR}' as cache directory."
+
+podman run \
+    ${ENTRYPOINT} \
+    --interactive \
+    --rm \
+    --tty \
+    --userns=keep-id \
+    --volume "${CACHEDIR}:/home/user/.cache:rw" \
+    --volume "${PWD}:${PWD}:rw" \
+    --workdir "${PWD}" \
+    "${IMAGE}" \
+    "$@"

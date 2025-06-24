@@ -1,0 +1,21 @@
+Source: envi
+Section: misc
+Priority: optional
+Maintainer: Ville Korhonen <ville@xd.fi>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+Standards-Version: 4.7.2
+Homepage: https://ypcs.fi/misc/envi
+Vcs-Browser: https://github.com/ypcs/envi
+Vcs-Git: https://github.com/ypcs/envi.git
+
+Package: envi
+Architecture: all
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ podman | docker.io | docker-ce | docker,
+Description: Envi is a tool to run single-use environments
+ These environments provide clean and restricted space to eg. run builds and
+ similar tasks without leaving too much cruft around.
