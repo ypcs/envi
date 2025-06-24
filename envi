@@ -50,7 +50,7 @@ podman run \
     --rm \
     --tty \
     --userns=keep-id \
-    --volume "${CACHEDIR}/cache:rw" \
+    --volume "${CACHEDIR}:/cache:rw" \
     --volume "${CACHEDIR}:/home/user/.cache:rw" \
     --volume "${PWD}:${PWD}:rw" \
     --workdir "${PWD}" \
