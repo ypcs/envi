@@ -11,7 +11,7 @@ RUN apt-setup && \
 RUN useradd --create-home user
 USER user
 
-ENV CARGO_HOME=/home/user/.cache/cargo
+ENV CARGO_HOME=/cache/cargo
 ENV RUSTC_WRAPPER=sccache
 ENTRYPOINT ["/usr/bin/cargo"]
 CMD ["--help"]
