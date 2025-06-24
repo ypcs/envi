@@ -11,6 +11,6 @@ RUN apt-setup && \
 
 RUN useradd --create-home user
 USER user
-ENV GOPATH=/cache/go
+ENV GOPATH=/cache/gopath
 ENTRYPOINT ["/usr/bin/go"]
 CMD ["--help"]
